@@ -152,16 +152,64 @@
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
       
       <!-- Video 1 -->
-      <div class="relative group rounded-lg overflow-hidden shadow hover:shadow-xl transition">
-        <a href="./img/download.mp4">
-          <!-- Convert Drive file to direct image link -->
-               alt="Video Project 1" 
-               class="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-500">
-          <div class="absolute inset-0 bg-black bg-opacity-40 group-hover:bg-opacity-60 flex items-center justify-center transition">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-white opacity-80 group-hover:opacity-100" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M8 5v14l11-7z"/>
-            </svg>
-          </div>
+      
+  <!-- Video Card -->
+  <div class="relative group rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition w-80 cursor-pointer" id="videoCard">
+    <img src="https://img.freepik.com/free-photo/video-thumbnail-abstract-background_23-2149044817.jpg" 
+         alt="Video Project 1" 
+         class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500">
+    <div class="absolute inset-0 bg-black/40 group-hover:bg-black/60 flex items-center justify-center transition">
+      <svg xmlns="http://www.w3.org/2000/svg" 
+           class="h-16 w-16 text-white opacity-80 group-hover:opacity-100" 
+           viewBox="0 0 24 24" fill="currentColor">
+        <path d="M8 5v14l11-7z"/>
+      </svg>
+    </div>
+    <div class="p-4 bg-white">
+      <h3 class="text-lg font-semibold text-gray-800">Video Project 1</h3>
+      <p class="text-sm text-gray-500">Click to play video</p>
+    </div>
+  </div>
+
+  <!-- Video Modal -->
+  <div id="videoModal" class="fixed inset-0 bg-black/80 hidden items-center justify-center z-50">
+    <div class="relative w-full max-w-3xl mx-4">
+      <button id="closeModal" 
+              class="absolute -top-10 right-0 text-white text-3xl font-bold hover:text-gray-300">&times;</button>
+      <video id="videoPlayer" controls class="w-full rounded-lg shadow-lg">
+        <source src="./img/download.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  </div>
+
+  <script>
+    const videoCard = document.getElementById('videoCard');
+    const videoModal = document.getElementById('videoModal');
+    const closeModal = document.getElementById('closeModal');
+    const videoPlayer = document.getElementById('videoPlayer');
+
+    videoCard.addEventListener('click', () => {
+      videoModal.classList.remove('hidden');
+      videoModal.classList.add('flex');
+      videoPlayer.play();
+    });
+
+    closeModal.addEventListener('click', () => {
+      videoModal.classList.remove('flex');
+      videoModal.classList.add('hidden');
+      videoPlayer.pause();
+    });
+
+    // Close modal when clicking outside the video
+    videoModal.addEventListener('click', (e) => {
+      if (e.target === videoModal) {
+        videoModal.classList.add('hidden');
+        videoModal.classList.remove('flex');
+        videoPlayer.pause();
+      }
+    });
+  </script>
         </a>
         <div class="p-4 text-left">
           <h3 class="font-semibold text-lg">Cinematic Promo</h3>
